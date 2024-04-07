@@ -1,0 +1,44 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Login</title>
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto max-w-md mt-10">
+        <form id="loginForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                    Email Address
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" id="email" class="form-control email" placeholder="Enter your email">
+                <div class="flex items-center justify-between mt-4">
+                <button   class="bg-pink-700 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" class="btn" onclick="sendOTP()">
+                    Send OTP
+                </button>
+                </div>
+            </div>
+            <div class="otpverify">
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="otp">
+                        OTP
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="otp_inp" type="text" placeholder="Enter OTP">
+                </div>
+                <div class="flex items-center justify-between">
+                    
+                    <button   class="bg-pink-700 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" class="btn" id="otp-btn" type="button">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

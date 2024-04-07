@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Small business tool </title>
+    
+    
+</head>
+<body class="flex flex-col h-screen">
+<!--Navbar-->
+<nav class="relative container mx-auto">
+    <!--Flex container-->
+    <div class="flex items-center justify-between">
+        <div class="pt-2">
+            <img src="images/logo.png" alt="" class="w h-20">
+        </div>
+        <!--Menuitems-->
+        <div class="hidden  space-x-6 md:flex">
+            
+                <a href="Navbar_components/about.html" class="hover:text-pink-900 font-bold">About</a>
+                <a href="Navbar_components/orderonline.html" class="hover:text-pink-900 font-bold">Order Online</a>
+                <a href="Navbar_components/contact.html" class="hover:text-pink-900 font-bold">Contact</a>
+            
+            
+        </div>
+        <!--Button-->
+        <div class="flex ">
+        <a href="Navbar_components/login.html" class="p-3 px-6 pt-2 text-white bg-pink-700 rounded-full baseline ">Login</a>
+        
+        
+        </div>
+        <!--hamburger menu-->
+        <button id="menu-btn" class="block hamburger md:hidden focus:outline-none">
+            <span class="hamburger-top"></span>
+            <span class="hamburger-middle"></span>
+            <span class="hamburger-bottom"></span>
+        </button>    
+    </div>
+    <!---mobile menu-->
+    <div class="md-hidden">
+        <div id="menu" class="absolute flex flex-col items-center hidden self-end  py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
+            <a href="#"> About</a>
+            <a href="#"> Order Online</a>
+            <a href="#"> Contact</a>
+        </div>
+    </div>
+</nav>
+<!--Party items-->
+<div class="relative container mx-auto mt-8 px-4">
+    <div class="md:flex items-center justify-between mb-8">
+        <img src="images/weddingcake1.jpeg" alt="Image" class="w-full md:w-1/2 pr-5 rounded-lg" style="padding: 20px;">
+      
+        <div class="w-full lg:w-1/2">
+            
+          <h2 class="text-5xl font-semibold italic font-cursive">"Crafting Memories in Every Slice: Specializing in Exquisite Wedding Cakes"</h2>
+       
+          <button class="mt-4 px-6 py-3 bg-pink-700 text-white rounded-full">Explore More</button>
+        </div>
+      </div>
+      
+      <div class="md:flex items-center justify-between mt-8 mb-8">
+        <div class="w-full lg:w-1/2 mb-8">
+            <h2 class="text-5xl font-semibold italic font-cursive">"Discover the Finest Breakfast Recipes Crafted with Passion and Expertise Here"</h2>
+            <button class="mt-4 px-6 py-3 bg-pink-700 text-white rounded-full">Explore More</button>
+        </div>
+        <img src="images/breakfast.jpeg" alt="Image" class="w-full md:w-1/2">
+    </div>
+    
+      
+</div>
+<!--other orders-->
+<div class="relative container mx-auto">
+<h2 class="text-5xl font-semibold italic font-cursive mb-4">More party orders available here</h2>
+    <div class="flex justify-between">
+        <!-- First Column - Mixed Pastries -->
+        <div class="flex flex-col items-center w-full md:w-2/3 mx-8">
+            <div class="h-60 w-full flex items-center justify-center overflow-hidden">
+            <img src="images/pastryicon.png" alt="" class="mb-4 w-1/2 h-2/3">
+            </div>
+            
+            <h1 class="text-4xl font-semibold italic  text-center">Pastries</h1>
+            <p class="text-2xl mb-4 italic  text-center">Delight in our assorted mixed pastries, each bursting with flavors that will leave you craving for more.</p>
+            <a href="otherorders/pastries.html">  <button class="px-4 py-2 mb-8 bg-pink-700 text-white rounded-full">Explore More</button>
+            </a>
+        </div>
+        <!-- Second Column - Cupcakes -->
+        <div class="flex flex-col items-center w-full md:w-2/3 mx-8">
+            <div class="h-60  w-full flex items-center justify-center overflow-hidden">
+            <img src="images/cupcakeicon.png" alt="" class="mb-4 w-2/3 h-2/3">
+             </div>
+            <h1 class="text-4xl font-semibold italic  text-center">Cup Cakes</h1>
+            <p class="text-2xl mb-4 italic  text-center">Indulge in our delectable cupcakes, lovingly baked with the finest ingredients to satisfy your sweet tooth.</p>
+            <a href="otherorders/cupcakes.html">  <button class="px-4 py-2 mb-8 bg-pink-700 text-white rounded-full">Explore More</button>
+            </div>
+        <!-- Third Column - Chocolates -->
+        <div class="flex flex-col items-center w-full md:w-2/3 mx-8">
+            <div class="h-60  w-full flex items-center justify-center overflow-hidden">
+            <img src="images/cakeicon.png" alt="" class="mb-4 w-2/3 h-2/3 ">
+            </div>
+            <h1 class="text-4xl font-semibold italic  text-center ">Cakes</h1>
+            <p class="text-2xl mb-4 italic  text-center">Experience pure bliss with our heavenly cakes, handcrafted to perfection for your ultimate enjoyment.</p>
+            <a href="otherorders/cakes.html">  <button class="px-4 py-2 mb-8 bg-pink-700 text-white rounded-full">Explore More</button>
+            </div>
+    </div>
+</div>
+<div class="bg-pink-700 py-2 text-black ">
+    <div class="container mx-auto">
+    <h2 class="text-lg font-semibold font-semibold mb-4 ">  CLICK BELOW to know more and connect with us</h2>
+    </div>
+ 
+</div>
+<!--Footer-->
+<footer class="bg-white text-black py-8">
+    <div class="container mx-auto flex justify-between">
+        <!-- First Column - Special Events -->
+        <div class="w-1/2 mx-4">
+            <h3 class="text-lg font-semibold mb-4">SPECIAL EVENTS</h3>
+            <ul>
+                <li><a href="#" class="hover:underline focus:underline">EASTER</a></li>
+                <li><a href="#" class="hover:underline focus:underline">CHRISTMAS</a></li>
+                <li><a href="#" class="hover:underline focus:underline">RAMADAN</a></li>
+                <li><a href="#" class="hover:underline focus:underline">NEW YEAR</a></li>
+                <li><a href="#" class="hover:underline focus:underline">BIRTHDAYS</a></li>
+            </ul>
+        </div>
+        <!-- Second Column - About -->
+        <div class="w-1/2 mx-4">
+            <h3 class="text-lg font-semibold mb-4">ABOUT</h3>
+            <ul>
+                <li><a href="#" class="hover:underline focus:underline">ABOUT US</a></li>
+                <li><a href="#" class="hover:underline focus:underline">CONTACT</a></li>
+                <li><a href="#" class="hover:underline focus:underline">LOCATION</a></li>
+                <li><a href="#" class="hover:underline focus:underline">FAQ</a></li>
+            </ul>
+        </div>
+         <!-- Third Column - Connected -->
+         <div class="w-1/2 mx-4">
+            <h3 class="text-lg font-semibold mb-4">Let's Stay Connected</h3>
+            
+        </div>
+    </div>
+</footer>
+
+
+
+</body>
+</html>

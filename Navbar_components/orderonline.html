@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between bg-pink-700 p-4 text-white">
+        <div>
+            <h1 class="text-2xl font-bold">Online Store</h1>
+        </div>
+        <div>
+            <button id="cart-btn" class="relative">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7H5l-3 9a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1l-3-9H9zm6 3a2 2 0 1 1-4 0"></path>
+                </svg>
+                <span id="cart-count" class="absolute top-0 right-0 w-5 h-5 bg-red-700 rounded-full text-xs flex items-center justify-center"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Product Grid -->
+    <div class="container mx-auto py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Product 1 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="cart1.avif" alt="Biscuits" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold">Biscuits</h2>
+                    <p class="text-gray-600">Price: $1.99</p>
+                    <button onclick="addToCart('Biscuits', 1.99)" class="mt-4 bg-pink-700 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="cart2.avif" alt="Pastries" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold">Pastries</h2>
+                    <p class="text-gray-600">Price: $5.99</p>
+                    <button onclick="addToCart('Pastries', 5.99)" class="mt-4 bg-pink-700 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="cart3.avif" alt="Croissants" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold">Croissants</h2>
+                    <p class="text-gray-600">Price: $2.99</p>
+                    <button onclick="addToCart('Croissants', 2.99)" class="mt-4 bg-pink-700 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="cart4.avif" alt="Chocolates" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold">Chocolates</h2>
+                    <p class="text-gray-600">Price: $2.99</p>
+                    <button onclick="addToCart('Chocolates', 2.99)" class="mt-4 bg-pink-700 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="cartModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <!-- Modal Overlay -->
+            <div class="fixed inset-0 bg-gray-900 opacity-50"></div>
+            <!-- Modal Content -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-xl relative w-full max-w-lg">
+                <!-- Close Button -->
+                <button id="closeModalBtn" class="absolute top-0 right-0 mt-4 mr-4">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <!-- Modal Header -->
+                <div class="p-4 bg-gray-200">
+                    <h2 class="text-xl font-semibold">Your Cart</h2>
+                </div>
+                <!-- Modal Body -->
+                <div id="cartItemsList" class="p-4"></div>
+                <!-- Total Price and Checkout Button -->
+                <div class="p-4 flex justify-between items-center">
+                    <p class="text-lg font-semibold" id="totalPrice"></p>
+                    <button id="checkoutBtn" class="bg-pink-700 hover:bg-pink-800 text-white font-bold py-2 px-4 rounded" onclick="checkout()" disabled>Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Cart Functionality -->
+    <script>
+        // Function to handle adding items to the cart
+        function addToCart(productName, price) {
+            // Retrieve the cart items from localStorage or initialize an empty array
+            let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if the product is already in the cart
+            const existingItemIndex = cartItems.findIndex(item => item.productName === productName);
+
+            if (existingItemIndex !== -1) {
+                // If the product is already in the cart, update its quantity
+                cartItems[existingItemIndex].quantity++;
+            } else {
+                // If the product is not in the cart, add it
+                cartItems.push({ productName, price, quantity: 1 });
+            }
+
+            // Save the updated cart items back to localStorage
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+
+            // Update the cart count displayed in the navigation bar
+            updateCartCount(cartItems.reduce((total, item) => total + item.quantity, 0));
+        }
+
+        // Function to update the cart count displayed in the navigation bar
+        function updateCartCount(count) {
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = count;
+            }
+        }
+
+        // Function to display the cart modal
+        function displayCart() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsList = document.getElementById('cartItemsList');
+            const totalPriceElement = document.getElementById('totalPrice');
+            let totalPrice = 0;
+
+            cartItemsList.innerHTML = '';
+
+            if (cartItems.length > 0) {
+                cartItems.forEach(item => {
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
+
+                    const itemInfo = document.createElement('div');
+                    itemInfo.textContent = `${item.productName} - Quantity: ${item.quantity}`;
+                    cartItemElement.appendChild(itemInfo);
+
+                    const quantityControls = document.createElement('div');
+                    quantityControls.classList.add('flex', 'items-center');
+
+                    const incrementButton = document.createElement('button');
+                    incrementButton.textContent = '+';
+                    incrementButton.classList.add('mx-1', 'px-2', 'py-1', 'bg-white-500', 'text-black', 'rounded', 'text-sm');
+                    incrementButton.onclick = () => updateQuantity(item.productName, 1);
+                    quantityControls.appendChild(incrementButton);
+
+                    const decrementButton = document.createElement('button');
+                    decrementButton.textContent = '-';
+                    decrementButton.classList.add('mx-1', 'px-2', 'py-1', 'bg-white-500', 'text-black', 'rounded', 'text-sm');
+                    decrementButton.onclick = () => updateQuantity(item.productName, -1);
+                    quantityControls.appendChild(decrementButton);
+
+                    cartItemElement.appendChild(quantityControls);
+
+                    cartItemsList.appendChild(cartItemElement);
+
+                    totalPrice += item.price * item.quantity;
+                });
+            } else {
+                const emptyCartMessage = document.createElement('p');
+                emptyCartMessage.textContent = 'Your cart is empty.';
+                cartItemsList.appendChild(emptyCartMessage);
+            }
+
+            // Display the total price
+            totalPriceElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
+
+            // Enable or disable the checkout button based on the total price
+            const checkoutButton = document.getElementById('checkoutBtn');
+            checkoutButton.disabled = totalPrice === 0;
+
+            // Show the modal
+            document.getElementById('cartModal').classList.remove('hidden');
+        }
+
+        // Function to update the quantity of an item in the cart
+        function updateQuantity(productName, change) {
+            // Retrieve the cart items from localStorage
+            let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Find the index of the item with the specified productName
+            const itemIndex = cartItems.findIndex(item => item.productName === productName);
+
+            if (itemIndex !== -1) {
+                // Update the quantity of the item
+                cartItems[itemIndex].quantity += change;
+
+                // If the quantity becomes zero or negative, remove the item from the cart
+                if (cartItems[itemIndex].quantity <= 0) {
+                    cartItems.splice(itemIndex, 1);
+                }
+
+                // Save the updated cart items back to localStorage
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+
+                // Update the cart count displayed in the navigation bar
+                updateCartCount(cartItems.reduce((total, item) => total + item.quantity, 0));
+
+                // Update the cart modal content
+                displayCart();
+            }
+        }
+
+        // Function to close the cart modal
+        function closeModal() {
+            document.getElementById('cartModal').classList.add('hidden');
+        }
+        function isLoggedIn() {
+            // Check if user is logged in (you may implement this logic based on your authentication system)
+            // For demonstration, assume the user is logged in
+            return true; // Change this to your actual logic
+        }
+
+        // Function to handle checkout process
+        function handleCheckout() {
+            if (isLoggedIn()) {
+                // Proceed with checkout process
+                alert("Checkout successful!"); // Replace with your checkout logic
+            } else {
+                // Redirect to login page
+                window.location.href = "login.html";
+            }
+        }
+
+        // Bind an event listener to the checkout button
+        document.getElementById('checkoutBtn').addEventListener('click', handleCheckout);
+
+        // Function to handle checkout
+        function checkout() {
+            // Implement your checkout logic here
+            alert('Checkout functionality will be implemented in the future!');
+        }
+
+        // Bind an event listener to the cart button to display the cart modal
+        document.getElementById('cart-btn').addEventListener('click', displayCart);
+
+        // Bind an event listener to the close button to close the cart modal
+        document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    </script>
+</body>
+</html>
